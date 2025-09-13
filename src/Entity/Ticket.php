@@ -17,6 +17,9 @@ class Ticket
     #[ORM\Column(length: 255)]
     private ?string $auteur = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
     #[ORM\Column]
     private ?\DateTime $dateOuverture = null;
 
@@ -48,6 +51,18 @@ class Ticket
     public function setAuteur(string $auteur): static
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }
