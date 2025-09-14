@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %} {% block title %}Hello TicketController!{%
+endblock %} {% block body %}
+<style></style>
+
+{{ form_start(formulaire, {'attr' : {'novalidate':'novalidate', 'data-turbo': 'false'}}) }}
+
+    {{ form_row(formulaire.email, {'attr': {'placeholder':'Mon adresse Email'}}) }}
+    {{ form_errors(formulaire.email) }}
+
+    {{ form_row(formulaire.description, {'attr': {'placeholder':'Explication de mon problème'}}) }}
+    {{ form_errors(formulaire.description) }}
+
+    {{ form_row(formulaire.categorie) }}
+    {{ form_errors(formulaire.categorie) }}
+
+<button type="submit" class="btn btn-primary">Valider</button>
+{{ form_end(formulaire) }}
+{% endblock %}

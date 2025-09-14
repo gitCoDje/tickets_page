@@ -39,7 +39,6 @@ class AppFixtures extends Fixture
 
         // Création d'un ticket exemple
         $ticket = new Ticket();
-        $ticket->setAuteur('Marie Curie');
         $ticket->setEmail('marie.curiet@radium.com');
         $ticket->setDateOuverture(new \DateTime());
         $ticket->setDescription('Problème informatique');

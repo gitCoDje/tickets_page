@@ -12,10 +12,7 @@ class Ticket
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $auteur = null;
+    private ?int $id = null;    
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
@@ -41,18 +38,6 @@ class Ticket
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): static
-    {
-        $this->auteur = $auteur;
-
-        return $this;
     }
 
     public function getEmail(): ?string
