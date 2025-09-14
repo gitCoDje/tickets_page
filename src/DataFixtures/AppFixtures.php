@@ -27,23 +27,27 @@ class AppFixtures extends Fixture
         );
         $manager->persist($admin);
 
-        // Création des statuts
-        $statutNouveau = new Statut();
-        $statutNouveau->setStatut('Nouveau');
-        $manager->persist($statutNouveau);
+        // Création des statuts  
+        $statuts = ['Nouveau','Ouvert','Résolu','Fermé'];
+        foreach($statuts as $libelle) {
+        $statut = new Statut();
+        $statut->setStatut($libelle);
+        $manager->persist($statut);}
 
-        // Création des catégories
-        $categorieIncident = new Categorie();
-        $categorieIncident->setNom('Anomalie');
-        $manager->persist($categorieIncident);
+        // Création des catégories        
+        $categories = ['Incident','Panne','Évolution','Anomalie','Information'];
+        foreach($categories as $nom) {
+        $categorie = new Categorie();
+        $categorie->setNom($nom);
+        $manager->persist($categorie);}
 
         // Création d'un ticket exemple
         $ticket = new Ticket();
-        $ticket->setEmail('marie.curiet@radium.com');
+        $ticket->setEmail('marie.curie@radium.com');
         $ticket->setDateOuverture(new \DateTime());
         $ticket->setDescription('Problème informatique');
-        $ticket->setCategorie($categorieIncident);
-        $ticket->setStatut($statutNouveau);
+        $ticket->setCategorie($categorie);
+        $ticket->setStatut($statut);
         $ticket->setResponsable($admin);
 
         $manager->persist($ticket);

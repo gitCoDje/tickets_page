@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %} {% block body %}
+<h1>Détail du ticket</h1>
+
+<ul>
+    <li>Email de l'auteur : {{ ticket.email }}</li>
+    <li>Date d’ouverture : {{ ticket.dateOuverture|date('d/m/Y H:i')}}</li>
+    <li>
+        Date de clôture : 
+        {% if ticket.dateCloture is not null %}
+        {{ ticket.dateCloture|date('d/m/Y H:i') }}
+        {% else %}
+        Non défini
+        {% endif %}
+    </li>
+    <li>description : {{ ticket.description }}</li>
+    <li>Catégorie : {{ ticket.categorie.nom }}</li>
+    <li>Statut : {{ ticket.statut.statut }}</li>
+    <li>Responsable : {% if ticket.responsable is not null %}
+        {{ ticket.responsable.email }}
+        {% else %}
+        Non défini
+        {% endif %}</li>
+</ul>
+
+<a href="{{ path('app_ticket') }}">Retour au ticket</a>
+
+{% endblock %}
