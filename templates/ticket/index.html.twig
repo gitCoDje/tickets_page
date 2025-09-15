@@ -1,5 +1,8 @@
-{% extends 'base.html.twig' %} {% block title %}Hello TicketController!{%
-endblock %} {% block body %}
+{# templates/ticket/index.html.twig #}
+
+{% extends 'base.html.twig' %} 
+{% block title %}Hello TicketController!{% endblock %} 
+{% block body %}
 <style></style>
 
 {{ form_start(formulaire, {'attr' : {'novalidate':'novalidate', 'data-turbo': 'false'}}) }}
@@ -15,4 +18,7 @@ endblock %} {% block body %}
 
 <button type="submit" class="btn btn-primary">Valider</button>
 {{ form_end(formulaire) }}
+
+<a href="{{ path('app_ticket_list') }}">Voir tous les tickets</a>
+
 {% endblock %}

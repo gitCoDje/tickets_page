@@ -1,0 +1,43 @@
+{# templates/ticket/list.html.twig #} {% extends 'base.html.twig' %} {% block
+title %}Listes des tickets{% endblock %} {% block body %}
+<h1>Listes des tickets</h1>
+
+<div class="d-flex flex-column gap-3">
+    {% for ticket in tickets %}
+    <div
+        class="d-flex justify-content-between align-items-center border p-3 rounded shadow-sm"
+    >
+        <div class="flex-grow-1">
+            <strong>ID :</strong> {{ ticket.id }} <br />
+            <strong>Email client :</strong> {{ ticket.email }} <br />
+            <strong>Date ouverture :</strong>
+            {{ ticket.dateOuverture|date('d/m/Y H:i') }} <br />
+            <strong>Catégorie :</strong> {{ ticket.categorie.nom }} <br />
+            <strong>Statut :</strong> {% if ticket.statut is not null %}
+            {{ ticket.statut.statut }}
+            {% else %} Non défini {% endif %} <br />
+            <strong>Responsable :</strong>
+            {% if ticket.responsable is not null %}
+            {{ ticket.responsable.email }}
+            {% else %} Non défini {% endif %}
+        </div>
+        <div>
+            <a
+                href="{{ path('app_ticket_show', { id: ticket.id }) }}"
+                class="btn btn-primary btn-sm"
+                >Voir</a
+            >
+        </div>
+    </div>
+    {% else %}
+    <div>Aucun ticket trouvé.</div>
+    {% endfor %}
+</div>
+
+<div class="mt-4">
+    <a href="{{ path('app_ticket') }}" class="btn btn-success"
+        >Créer un nouveau ticket</a
+    >
+</div>
+
+{% endblock %}
