@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Ticket;
 use App\Form\TicketType;
 use App\Repository\StatutRepository;
+use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,19 +58,6 @@ final class TicketController extends AbstractController
         // Affiche le détail du ticket dans la page show
         return $this->render('ticket/show.html.twig', [
             'ticket' => $ticket,
-        ]);
-    }
-    
-    // Route pour la page list qui affiche la liste de tous les tickets
-    #[Route('/tickets', name: 'app_ticket_list', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
-    {
-        // Récupère tous les tickets depuis le repository de Ticket
-        $tickets = $entityManager->getRepository(Ticket::class)->findAll();
-
-        // Affiche la liste des tickets dans la page list
-        return $this->render('ticket/list.html.twig', [
-            'tickets' => $tickets,
         ]);
     }
 

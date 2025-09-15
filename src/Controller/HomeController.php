@@ -12,10 +12,8 @@ class HomeController extends AbstractController
 {
 
     #[Route('/', name: 'app_home')]
-    public function accueil(): Response
+    public function homeRedirect(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'titre' => 'Bienvenue sur le suivi des tickets',
-        ]);
+        return $this->redirectToRoute('app_ticket');
     }
 }

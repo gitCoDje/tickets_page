@@ -1,5 +1,7 @@
 <?php
 
+// src/Entity/Utilisateur.php
+
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
