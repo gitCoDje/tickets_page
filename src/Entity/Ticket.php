@@ -1,5 +1,7 @@
 <?php
 
+// src/Entity/Ticket.php
+
 namespace App\Entity;
 
 use App\Repository\TicketRepository;
@@ -12,7 +14,7 @@ class Ticket
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;    
+    private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
@@ -33,7 +35,7 @@ class Ticket
     private ?Statut $statut = null;
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    private ?Utilisateur $responsable = null;
+    private ?Utilisateur $responsable = null;    
 
     public function getId(): ?int
     {
@@ -106,6 +108,13 @@ class Ticket
     public function setStatut(?Statut $statut): static
     {
         $this->statut = $statut;
+
+        if ($statut && in_array($statut->getStatut(), ['Résolu', 'Fermé'])) {
+            $this->dateCloture = new \DateTime();
+        } else {
+            $this->dateCloture = null; // Optionnel : effacer la date si statut différent
+        }
+
         return $this;
     }
 

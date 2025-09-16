@@ -1,6 +1,6 @@
 <?php
 
-// src/Form/TicketType.php
+// src/Form/TicketAdminType.php
 
 namespace App\Form;
 
@@ -11,55 +11,41 @@ use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class TicketType extends AbstractType
+class TicketAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Ajoute le champ email
             ->add('email', TextType::class, [
                 'label' => 'Votre Email',
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => "L'adresse Email est obligatoire."
-                    ]),
-                    new Email([
-                        'message' => "L'adresse Email n'est pas au bon format."
-                    ]),
-                ]
+                    new NotBlank(['message' => "L'adresse Email est obligatoire."]),
+                    new Email(['message' => "L'adresse Email n'est pas au bon format."])
+                ],
             ])
-            // Ajoute le champ description
             ->add('description', TextareaType::class, [
                 'label' => 'Description du ticket',
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'height: 100px; width: 100%;',
-                    'minlength'=> 20,
-                    'maxlength'=> 250
-                ],
+                'attr' => ['class' => 'form-control', 'rows' => 10, 'cols' => 50],
                 'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => "La description est obligatoire."
-                    ]),
+                    new NotBlank(['message' => "La description est obligatoire."]),
                     new Length([
                         'min' => 20,
                         'minMessage' => "La description doit contenir au moins {{ limit }} caractères.",
                         'max' => 250,
-                        'maxMessage' => "La description ne doit pas dépasser {{ limit }} caractères."
+                        'maxMessage' => "La description ne doit pas dépasser {{ limit }} caractères.",
                     ]),
-                ]
+                ],
             ])
-            // Ajoute l'option catégrorie
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom',
@@ -68,10 +54,24 @@ class TicketType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(['message' => "Veuillez sélectionner une catégorie"])
-                ]
-                // Ajoute l'option statut (uniquement pour l'admin et le personnel)
+                ],
+            ])
+            ->add('statut', EntityType::class, [
+                'class' => Statut::class,
+                'choice_label' => 'statut',
+                'label' => 'Statut',
+                'placeholder' => 'Choisir un statut',
+                'required' => true,
+            ])
+            ->add('responsable', EntityType::class, [
+                'class' => Utilisateur::class,
+                'choice_label' => 'email',
+                'label' => 'Responsable',
+                'placeholder' => 'Choisir un responsable',
+                'required' => false,
             ]);
     }
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

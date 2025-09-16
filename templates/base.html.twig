@@ -26,11 +26,10 @@
     </head>
     <body>
         <nav>
-            <!-- Menu de navigation -->
-            {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_admin') }}">Admin</a>
-            {% endif %} {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('app_admin') }}">Tickets</a>
+            <!-- Menu -->
+            {% if app.user and (is_granted('ROLE_ADMIN') or
+            is_granted('ROLE_USER')) %}
+            <li><a href="{{ path('app_admin') }}">Admin</a></li>
             {% endif %} {% if app.user %}
             <a href="{{ path('app_logout') }}">Déconnexion</a>
             {% else %}
@@ -38,6 +37,18 @@
             {% endif %}
         </nav>
 
-        <div class="container mt-4">{% block body %}{% endblock %}</div>
+        <div class="container mt-4">
+            {% block body %} {# Boîte à message d'erreur ou de succès #} {% for
+            label, messages in app.flashes %} {% for message in messages %}
+            <div
+                class="alert alert-{{
+                    label == 'error' ? 'danger' : label
+                }} p-2 my-2 small rounded mx-auto w-50"
+                role="alert"
+            >
+                {{ message }}
+            </div>
+            {% endfor %} {% endfor %} {% endblock %}
+        </div>
     </body>
 </html>

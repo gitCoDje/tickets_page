@@ -1,0 +1,16 @@
+{# templates/admin/category_form.html.twig #} {% extends 'base.html.twig' %} {%
+block title %}
+{{ title }}
+{% endblock %} {% block body %}
+<div class="container mt-4">
+    <h1>{{ title }}</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    <button class="btn btn-primary mt-3">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('admin_category_list') }}" class="btn btn-link mt-3"
+        >Retour à la liste des catégories</a
+    >
+</div>
+{% endblock %}

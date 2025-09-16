@@ -1,0 +1,46 @@
+{# templates/admin/categories_list.html.twig #} {% extends 'base.html.twig' %}
+{% block title %}Liste des catégories{% endblock %} {% block body %}
+<div class="container mt-4">
+    <h1>Liste des catégories</h1>
+
+    <div class="d-flex flex-column gap-3">
+        {% for categorie in categories %}
+        <div
+            class="d-flex justify-content-between align-items-center p-3 border rounded"
+        >
+            <div class="fs-5">{{ categorie.nom }}</div>
+            <div>
+                <a
+                    href="{{
+                        path('admin_category_edit', { id: categorie.id })
+                    }}"
+                    class="btn btn-primary btn-sm me-2"
+                    >Modifier</a
+                >
+                <a
+                    href="{{
+                        path('admin_category_delete', { id: categorie.id })
+                    }}"
+                    class="btn btn-danger btn-sm"
+                >
+                    Supprimer
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center text-muted p-3 border rounded">
+            Aucune catégorie enregistrée.
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('admin_category_create') }}" class="btn btn-primary"
+            >Ajouter une catégorie</a
+        >
+        <a href="{{ path('app_admin') }}" class="btn btn-secondary"
+            >Retour</a
+        >
+    </div>
+</div>
+{% endblock %}

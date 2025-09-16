@@ -8,12 +8,17 @@
 
     <p>Utilisez le menu pour accéder aux différentes sections :</p>
 
-    <ul>
-        <li><a href="{{ path('app_admin_list') }}">Gestion des tickets</a></li>
-        <li><a href="{{ path('admin_categorie_list') }}">Gestion des catégories</a></li>
-        <li><a href="{{ path('admin_statut_list') }}">Gestion des statuts</a></li>
-        <li><a href="{{ path('admin_responsable_list') }}">Gestion des responsables</a></li>
-        <!-- Ajouter d’autres liens au besoin -->
+    <ul>  
+
+        <li><a href="{{ path('app_admin_ticket_list') }}">Gestion des tickets</a></li>
+        <li><a href="{{ path('app_ticket') }}">Créer un ticket</a></li>
+
+        {# Menu réservé seulement à l'admin #}
+         {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('admin_category_list') }}">Gestion des catégories</a></li>
+        <li><a href="{{ path('admin_status_list') }}">Gestion des statuts</a></li>
+        {# <li><a href="{{ path('admin_responsable_list') }}">Gestion des responsables</a></li> #}
+        {% endif %}       
     </ul>
 </div>
 {% endblock %}

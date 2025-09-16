@@ -1,0 +1,26 @@
+
+
+{# templates/admin/ticket_edit.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un ticket{% endblock %}
+
+{% block body %}
+<h1>Modifier le ticket #{{ ticket.id }}</h1>
+
+{# Démarre le formulaire Symfony #}
+{{ form_start(form) }}
+
+{# Rend tous les champs du formulaire #}
+{{ form_widget(form) }}
+
+{# Bouton de soumission #}
+<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+
+{# Termine le formulaire #}
+{{ form_end(form) }}
+
+{# Lien pour revenir à la liste des tickets #}
+<a href="{{ path('app_admin_ticket_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+{% endblock %}
