@@ -1,3 +1,6 @@
+
+{# templates/base.html.twig #}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,17 +28,29 @@
         }}{% endblock %} {% endblock %}
     </head>
     <body>
+        {# Permet que le header et le menu ne s'affiche pas sur la page de connexion #}
+        {% if app.request.attributes.get('_route') != 'app_login' %}
+        <header>
+            <h2><a href="{{ path('app_home') }}">Ticket Page</a></h2>
+
+            <div class="log">
+                <p>{{ app.user ? app.user.email : "" }}</p>
+                {% if app.user and (is_granted('ROLE_ADMIN') or
+                is_granted('ROLE_USER')) %} {% endif %} {% if app.user %}
+                <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
+                {% else %}
+                <p><a href="{{ path('app_login') }}">Connexion</a></p>
+                {% endif %}
+            </div>        
+        </header>
         <nav>
             <!-- Menu -->
             {% if app.user and (is_granted('ROLE_ADMIN') or
             is_granted('ROLE_USER')) %}
             <li><a href="{{ path('app_admin') }}">Admin</a></li>
-            {% endif %} {% if app.user %}
-            <a href="{{ path('app_logout') }}">Déconnexion</a>
-            {% else %}
-            <a href="{{ path('app_login') }}">Connexion</a>
             {% endif %}
         </nav>
+        {% endif %}
 
         <div class="container mt-4">
             {% block body %} {# Boîte à message d'erreur ou de succès #} {% for

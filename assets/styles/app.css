@@ -1,3 +1,53 @@
+/* assets/styles/app.css */
+
+:root {
+  --couleur-principale: #2196f3;
+  --couleur-secondaire: #03a9f4;
+  --couleur-arriere-plan: #ffffff;
+  --couleur-texte: #212121;
+}
+
 body {
-    background-color: skyblue;
+    background-color: rgb(172, 235, 135);
+}
+
+header {
+    background-color: whitesmoke;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* LOGIN */
+.connexion {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.connexion h1 {
+    font-size: 2.5rem;
+    color: var(--couleur-principale);
+    text-shadow: 0px 0px 1px var(--couleur-texte);
+}
+.form_connexion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.form_connexion input {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.form_connexion input[type="submit"] {
+    padding: 0.5rem;
+    margin: 1rem auto 1rem auto;
+    background-color: var(--couleur-secondaire);
+    color: var(--couleur-arriere-plan);
+}
+.form_connexion input[type="submit"]:hover {
+    background-color: var(--couleur-principale);
 }

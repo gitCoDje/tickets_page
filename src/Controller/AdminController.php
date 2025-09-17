@@ -1,22 +1,27 @@
 <?php
 
+// src/Controller/AdminController.php
+
 namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Statut;
 use App\Entity\Ticket;
+use App\Entity\Utilisateur;
 use App\Form\CategorieType;
 use App\Form\StatutType;
 use App\Form\TicketAdminType;
 use App\Form\TicketStatusType;
-use App\Form\TicketType;
+use App\Form\UtilisateurType;
 use App\Repository\CategorieRepository;
 use App\Repository\StatutRepository;
 use App\Repository\TicketRepository;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class AdminController extends AbstractController
@@ -189,7 +194,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    // Route pour la création d'une nouvelle statut
+    // Route pour la création d'un nouveau statut
     #[Route('/statuts/create', name: 'app_admin_status_create', methods: ['GET', 'POST'])]
     public function createStatus(Request $request, EntityManagerInterface $em): Response
     {
@@ -212,7 +217,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    // Route pour modifier une statut existante
+    // Route pour modifier un statut existant
     #[Route('/statuses/{id}/edit', name: 'app_admin_status_edit', methods: ['GET', 'POST'])]
     public function editNomStatus(int $id, Request $request, StatutRepository $statutRepository, EntityManagerInterface $em): Response
     {
@@ -253,5 +258,101 @@ final class AdminController extends AbstractController
         $this->addFlash('success', 'Statut supprimée avec succès.');
 
         return $this->redirectToRoute('admin_status_list');
+    }
+
+
+    /* ========== GESTION UTILISATEUR ========== */
+
+    // Route pour afficher la liste des utilisateurs
+    #[Route('/utilisateurs', name: 'app_admin_user_list', methods: ['GET'])]
+    public function listUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $utilisateurs = $utilisateurRepository->findAll();
+        return $this->render('admin/user_list.html.twig', [
+            'utilisateurs' => $utilisateurs,
+        ]);
+    }
+    // Inject UserPasswordHasherInterface via constructeur
+    public function __construct(private UserPasswordHasherInterface $passwordHasher) {}
+
+    // Route pour la création d'un nouvel utilisateur
+    #[Route('/utilisateurs/create', name: 'app_admin_user_create', methods: ['GET', 'POST'])]
+    public function createUtilisateur(Request $request, EntityManagerInterface $em): Response
+    {
+        $utilisateur = new Utilisateur();
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupère le mot de passe en clair depuis le formulaire
+            $plainPassword = $form->get('password')->getData();
+
+            if ($plainPassword) {
+                // Hash le mot de passe suivant la méthode vue dans la fixture
+                $encodedPassword = $this->passwordHasher->hashPassword($utilisateur, $plainPassword);
+                $utilisateur->setPassword($encodedPassword);
+            }
+
+            $em->persist($utilisateur);
+            $em->flush();
+
+            $this->addFlash('success', 'Utilisateur créé avec succès.');
+
+            return $this->redirectToRoute('app_admin_user_list');
+        }
+
+        return $this->render('admin/user_form.html.twig', [
+            'form' => $form->createView(),
+            'title' => 'Créer un nouvel utilisateur',
+        ]);
+    }
+
+    // Route pour la modification d'un utilisateur existant
+    #[Route('/utilisateurs/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
+    public function editUtilisateur(int $id, Request $request, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
+    {
+        $utilisateur = $utilisateurRepository->find($id);
+
+        if (!$utilisateur) {
+            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        }
+
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Utilisateur modifié avec succès.');
+            return $this->redirectToRoute('app_admin_user_list');
+        }
+
+        return $this->render('admin/user_form.html.twig', [
+            'form' => $form->createView(),
+            'title' => 'Modifier l\'utilisateur',
+        ]);
+    }
+
+    // Route pour la suppression d'un utilisateur existant
+    #[Route('/utilisateurs/{id}/delete', name: 'app_admin_user_delete', methods: ['GET'])]
+    public function deleteUtilisateur(int $id, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
+    {
+        $utilisateur = $utilisateurRepository->find($id);
+
+        if (!$utilisateur) {
+            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        }
+
+        // Empêche la suppression de l'admin principal
+        if ($utilisateur->getEmail() === 'admin@ticket.com') {
+            $this->addFlash('error', 'Impossible de supprimer l\'administrateur principal.');
+            return $this->redirectToRoute('app_admin_user_list');
+        }
+
+        $em->remove($utilisateur);
+        $em->flush();
+
+        $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+        return $this->redirectToRoute('app_admin_user_list');
     }
 }

@@ -5,7 +5,6 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -74,8 +73,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function eraseCredentials(): void
-{
-    // effacer les données sensibles temporaires si besoin
-}
-
+    {
+        
+    }
 }

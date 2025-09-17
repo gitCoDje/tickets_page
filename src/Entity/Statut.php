@@ -1,5 +1,7 @@
 <?php
 
+// src/Entity/Statut.php
+
 namespace App\Entity;
 
 use App\Repository\StatutRepository;
