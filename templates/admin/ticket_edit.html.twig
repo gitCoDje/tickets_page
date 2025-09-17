@@ -1,26 +1,22 @@
+{# templates/admin/ticket_edit.html.twig #} {% extends 'base.html.twig' %} {%
+block title %}Modifier un ticket{% endblock %} {% block body %}
+<div class="container mb-3">
+    <h2>Modifier le ticket #{{ ticket.id }}</h2>
 
+    {# Démarre le formulaire Symfony #}
+    {{ form_start(form) }}
 
-{# templates/admin/ticket_edit.html.twig #}
+    {# Rend tous les champs du formulaire #}
+    {{ form_widget(form) }}
 
-{% extends 'base.html.twig' %}
+    {# Bouton de soumission #}
+    <button type="submit" class="btn btn-primary ">Enregistrer</button>
 
-{% block title %}Modifier un ticket{% endblock %}
+    {# Lien pour revenir à la liste des tickets #}
+    <a href="{{ path('app_admin_ticket_list') }}" class="btn btn-secondary">Retour à la liste</a
+    >
+    {# Termine le formulaire #}
+    {{ form_end(form) }}
 
-{% block body %}
-<h1>Modifier le ticket #{{ ticket.id }}</h1>
-
-{# Démarre le formulaire Symfony #}
-{{ form_start(form) }}
-
-{# Rend tous les champs du formulaire #}
-{{ form_widget(form) }}
-
-{# Bouton de soumission #}
-<button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
-
-{# Termine le formulaire #}
-{{ form_end(form) }}
-
-{# Lien pour revenir à la liste des tickets #}
-<a href="{{ path('app_admin_ticket_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>
 {% endblock %}

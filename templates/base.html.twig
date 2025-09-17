@@ -1,4 +1,3 @@
-
 {# templates/base.html.twig #}
 
 <!DOCTYPE html>
@@ -28,28 +27,57 @@
         }}{% endblock %} {% endblock %}
     </head>
     <body>
-        {# Permet que le header et le menu ne s'affiche pas sur la page de connexion #}
-        {% if app.request.attributes.get('_route') != 'app_login' %}
-        <header>
-            <h2><a href="{{ path('app_home') }}">Ticket Page</a></h2>
+        {# Permet que le header et le menu ne s'affiche pas sur la page de
+        connexion #} 
+        {% if app.request.attributes.get('_route') != 'app_login'%} 
+        
+        {# ========== HEADER ========== #}
+        <header class="shadow">
+            <div
+                class="log d-flex justify-content-between align-items-end mx-auto w-75"
+            >
+                {# Titre du site #}
+                <a href="{{ path('app_home') }}"
+                    ><h1>Ticket <span>Page</span></h1></a
+                >
+                <div class="d-flex flex-column align-items-center">
+                    {# Nom de l'utilisateur loggé #}
+                    <p>{{ app.user ? app.user.email : "" }}</p>
 
-            <div class="log">
-                <p>{{ app.user ? app.user.email : "" }}</p>
-                {% if app.user and (is_granted('ROLE_ADMIN') or
-                is_granted('ROLE_USER')) %} {% endif %} {% if app.user %}
-                <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
-                {% else %}
-                <p><a href="{{ path('app_login') }}">Connexion</a></p>
-                {% endif %}
-            </div>        
+                    {# Bouton de connexion ou deconnexion selon si un
+                    utilisateur est connecté ou pas #} {% if app.user and
+                    (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %} {%
+                    endif %} {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="text-decoration-none btn-link">( Se déconnecter )</a>
+
+                    {% else %}
+                    <a href="{{ path('app_login') }}"
+                        ><span class="log">Se connecter</span></a
+                    >
+                    {% endif %}
+                </div>
+            </div>
+            
+            {# ========== NAVIGATION ========== #}
+            <nav class="justify-content-center d-flex flex-fill m-3">
+                <div class="container">
+                    <ul class="nav nav-pills justify-content-center w-100">
+                        <!-- Ajout de w-100 ici -->
+                        <!-- Menu -->
+                        {% if app.user and (is_granted('ROLE_ADMIN') or
+                        is_granted('ROLE_USER')) %}
+                        <li class="nav-item flex-fill mx-2">
+                            <a
+                                href="{{ path('app_admin') }}"
+                                class="btn btn-primary w-100"
+                                >Tableau de bord Admin</a
+                            >
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
         </header>
-        <nav>
-            <!-- Menu -->
-            {% if app.user and (is_granted('ROLE_ADMIN') or
-            is_granted('ROLE_USER')) %}
-            <li><a href="{{ path('app_admin') }}">Admin</a></li>
-            {% endif %}
-        </nav>
         {% endif %}
 
         <div class="container mt-4">

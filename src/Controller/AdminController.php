@@ -129,7 +129,7 @@ final class AdminController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Catégorie créée avec succès.');
-            return $this->redirectToRoute('admin_category_list');
+            return $this->redirectToRoute('app_admin_category_list');
         }
 
         return $this->render('admin/category_form.html.twig', [
@@ -155,7 +155,7 @@ final class AdminController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Catégorie modifiée avec succès.');
-            return $this->redirectToRoute('admin_category_list');
+            return $this->redirectToRoute('app_admin_category_list');
         }
 
         return $this->render('admin/category_form.html.twig', [
@@ -178,7 +178,7 @@ final class AdminController extends AbstractController
 
         $this->addFlash('success', 'Catégorie supprimée avec succès.');
 
-        return $this->redirectToRoute('admin_category_list');
+        return $this->redirectToRoute('app_admin_category_list');
     }
 
     /* ========== GESTION STATUT ========== */
@@ -208,7 +208,7 @@ final class AdminController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Statut créée avec succès.');
-            return $this->redirectToRoute('admin_status_list');
+            return $this->redirectToRoute('app_admin_status_list');
         }
 
         return $this->render('admin/status_form.html.twig', [
@@ -234,7 +234,7 @@ final class AdminController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Statut modifiée avec succès.');
-            return $this->redirectToRoute('admin_status_list');
+            return $this->redirectToRoute('app_admin_status_list');
         }
 
         return $this->render('admin/status_form.html.twig', [
@@ -257,7 +257,7 @@ final class AdminController extends AbstractController
 
         $this->addFlash('success', 'Statut supprimée avec succès.');
 
-        return $this->redirectToRoute('admin_status_list');
+        return $this->redirectToRoute('app_admin_status_list');
     }
 
 

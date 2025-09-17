@@ -1,53 +1,94 @@
 /* assets/styles/app.css */
 
 :root {
-  --couleur-principale: #2196f3;
-  --couleur-secondaire: #03a9f4;
-  --couleur-arriere-plan: #ffffff;
-  --couleur-texte: #212121;
+  --couleur-principale: #004085;
+  --couleur-secondaire: #fd7e14;
+  --couleur-arriere-plan: #f0f4f8;
+  --couleur-arriere-plan-w: #ffffff;
+  --couleur-texte: #1f2225;
 }
 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-    background-color: rgb(172, 235, 135);
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  background-color: var(--couleur-arriere-plan);
+  color: var(--couleur-texte);
+}
+a {
+  text-decoration: none;
+  color: var(--couleur-texte);
+}
+a:hover,
+a:active,
+a:focus {
+  filter: opacity(0.9);
+}
+ul {
+  list-style: none;
+}
+h1 {
+    margin: 1rem;
+  font-size: 2.5rem;
+}
+span {
+  text-transform: capitalize;
+  font-weight: bold;
+  color: var(--couleur-secondaire);
+}
+h2 {
+  margin-top: 0.5rem;
 }
 
-header {
-    background-color: whitesmoke;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+.container{
+     max-width:700px ;
 }
 
-/* LOGIN */
-.connexion {
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+.header {
+    background-color: whitesmoke;    
 }
-.connexion h1 {
-    font-size: 2.5rem;
-    color: var(--couleur-principale);
-    text-shadow: 0px 0px 1px var(--couleur-texte);
+.header h1{
+    background-color: whitesmoke;    
 }
-.form_connexion {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+.log {
+  text-align: center;
 }
-.form_connexion input {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+.log p:first-child {
+  color: var(--couleur-principale);
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
 }
-.form_connexion input[type="submit"] {
-    padding: 0.5rem;
-    margin: 1rem auto 1rem auto;
-    background-color: var(--couleur-secondaire);
-    color: var(--couleur-arriere-plan);
+.log a {
+  font-size: 0.9rem;
+  color: var(--couleur-texte);
+  text-align: center;
 }
-.form_connexion input[type="submit"]:hover {
-    background-color: var(--couleur-principale);
+.btn-primary {  
+  background-color: var(--couleur-principale);
+  color: var(--couleur-arriere-plan);
+}
+.btn-primary:hover {
+  background-color: var(--couleur-secondaire);
+}
+.btn-primary:active {
+  background-color: var(--couleur-secondaire);
+}
+.btn {
+    margin: 0 0.25em;
+  font-weight: 600;
+  cursor: pointer;
+  border: none; 
+  box-shadow: 1px 1px 3px black;
+  transition: background-color 0.3s ease;
+}
+.btn:active {
+  box-shadow: 0px 0px 0px;
 }

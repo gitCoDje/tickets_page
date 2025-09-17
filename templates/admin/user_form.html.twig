@@ -2,7 +2,7 @@
 block title %}
 {{ title }}
 {% endblock %} {% block body %}
-<div class="container mt-4">
+<div class="container mb-4">
     <h1>{{ title }}</h1>
     {{ form_start(form) }}
     {{ form_row(form.email) }}
@@ -11,8 +11,8 @@ block title %}
     <button class="btn btn-primary mt-3">Enregistrer</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('app_admin_user_list') }}" class="btn btn-link mt-3"
-        >Retour à la liste des utilisateurs</a
+    <a href="{{ path('app_admin_user_list') }}" class="btn btn-secondary mt-3"
+        >Retour à la liste</a
     >
 </div>
 {% endblock %}

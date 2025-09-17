@@ -1,9 +1,11 @@
 {# templates/ticket/index.html.twig #}
 
 {% extends 'base.html.twig' %} 
-{% block title %}Hello TicketController!{% endblock %} 
+{% block title %}Création de ticket{% endblock %} 
 {% block body %}
 <style></style>
+<div class="container mb-4">
+    <h2 class="my-4">Création de ticket</h2>
 
 {{ form_start(formulaire, {'attr' : {'novalidate':'novalidate', 'data-turbo': 'false'}}) }}
 
@@ -16,6 +18,9 @@
 
 <button type="submit" class="btn btn-primary">Valider</button>
 {{ form_end(formulaire) }}
+
+</div>
+
 
 
 {% endblock %}
