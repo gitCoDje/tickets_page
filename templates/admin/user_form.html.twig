@@ -1,18 +1,29 @@
-{# templates/admin/user_form.html.twig #} {% extends 'base.html.twig' %} {%
-block title %}
-{{ title }}
-{% endblock %} {% block body %}
-<div class="container mb-4">
-    <h1>{{ title }}</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password) }}
-    {{ form_row(form.roles) }}
-    <button class="btn btn-primary mt-3">Enregistrer</button>
-    {{ form_end(form) }}
+{# templates/admin/user_form.html.twig #}
 
-    <a href="{{ path('app_admin_user_list') }}" class="btn btn-secondary mt-3"
-        >Retour à la liste</a
-    >
-</div>
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{# Définit le titre de la page #}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container mb-4">
+		<h1>{{ title }}</h1>
+		{# Démarre le formulaire #}
+		{{ form_start(form) }}
+		{# Affiche le champ pour l'email de l'utilisateur #}
+		{{ form_row(form.email) }}
+		{# Affiche le champ pour le mot de passe de l'utilisateur #}
+		{{ form_row(form.password) }}
+		{# Affiche le champ pour les rôles de l'utilisateur #}
+		{{ form_row(form.roles) }}
+		{# Bouton pour soumettre le formulaire #}
+		<button class="btn btn-primary mt-3">Enregistrer</button>
+		{# Termine le formulaire #}
+		{{ form_end(form) }}
+
+		{# Lien pour revenir à la liste des utilisateurs #}
+		<a href="{{ path('app_admin_user_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+	</div>
 {% endblock %}

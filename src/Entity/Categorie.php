@@ -7,31 +7,40 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+// Indique que la classe Categorie est une entité Doctrine avec un repository associé
+#[ORM\Entity(repositoryClass: CategorieRepository::class)] 
 class Categorie
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    // Indique que cette propriété est la clé primaire
+    #[ORM\Id] 
+    // Indique que l'identifiant est généré automatiquement par la base de données
+    #[ORM\GeneratedValue] 
+    // Définit cette propriété comme une colonne dans la base de données
+    #[ORM\Column] 
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    // Définit la colonne pour le nom avec une longueur maximale de 50 caractères
+    #[ORM\Column(length: 50)] 
     private ?string $nom = null;
 
     public function getId(): ?int
     {
-        return $this->id;
+        // Retourne l'identifiant de la catégorie
+        return $this->id; 
     }
 
     public function getNom(): ?string
     {
-        return $this->nom;
+        // Retourne le nom de la catégorie
+        return $this->nom; 
     }
 
     public function setNom(string $nom): static
     {
-        $this->nom = $nom;
+        // Définit le nom de la catégorie
+        $this->nom = $nom; 
 
-        return $this;
+        // Permet le chaînage des méthodes
+        return $this; 
     }
 }

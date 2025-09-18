@@ -14,10 +14,12 @@ class CategorieFixtures extends Fixture
     // méthode load pour charger les données dans la base de données.
     public function load(ObjectManager $manager): void
     {
-        // Création des catégories        
+        // Tableau des noms de catégories à créer     
         $categories = ['Incident', 'Panne', 'Évolution', 'Anomalie', 'Information'];
+        // Parcours chaque nom de catégorie pour créer une entité correspondante
         foreach ($categories as $nom) {
             $categorie = new Categorie();
+            // Définit le nom de la catégorie
             $categorie->setNom($nom);
 
             // prépare la sauvegarde en base

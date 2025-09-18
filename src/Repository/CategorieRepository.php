@@ -1,5 +1,7 @@
 <?php
 
+// src/Repository/CategorieRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Categorie;
@@ -13,6 +15,7 @@ class CategorieRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
+          // Appelle le constructeur de la classe parente avec le registre et la classe associée
         parent::__construct($registry, Categorie::class);
     }
 

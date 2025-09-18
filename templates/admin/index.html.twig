@@ -1,49 +1,34 @@
-{# templates/admin/index.html.twig #} {% extends 'base.html.twig' %} {% block
-title %}Tableau de bord Admin{% endblock %} {% block body %}
-<div class="container p-4 rounded border">
-    <h2 class="mb-4 text-primary">Bienvenue dans l’espace d’administration</h2>
+{# templates/admin/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}
+Tableau de bord Admin
+{% endblock %}
+{% block body %}
+	<div class="container p-4 rounded border">
+		<h2 class="mb-4 text-primary">Bienvenue dans l’espace d’administration</h2>
 
-    <p class="lead">Utilisez le menu pour accéder aux différentes sections :</p>
+		<p class="lead">Utilisez le menu pour accéder aux différentes sections :</p>
 
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a
-                href="{{ path('app_ticket') }}"
-                class="text-decoration-none btn-link"
-                >Créer un ticket</a
-            >
-        </li>
-        <li class="list-group-item">
-            <a
-                href="{{ path('app_admin_ticket_list') }}"
-                class="text-decoration-none btn-link "
-                >Gestion des tickets</a
-            >
-        </li>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="{{ path('app_ticket') }}" class="text-decoration-none btn-link">Créer un ticket</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{{ path('app_admin_ticket_list') }}" class="text-decoration-none btn-link ">Gestion des tickets</a>
+			</li>
 
-        {# Menu réservé seulement à l'admin #} {% if is_granted('ROLE_ADMIN') %}
-        <li class="list-group-item">
-            <a
-                href="{{ path('app_admin_category_list') }}"
-                class="text-decoration-none btn-link "
-                >Gestion des catégories</a
-            >
-        </li>
-        <li class="list-group-item">
-            <a
-                href="{{ path('app_admin_status_list') }}"
-                class="text-decoration-none btn-link "
-                >Gestion des statuts</a
-            >
-        </li>
-        <li class="list-group-item">
-            <a
-                href="{{ path('app_admin_user_list') }}"
-                class="text-decoration-none btn-link "
-                >Gestion des utilisateurs</a
-            >
-        </li>
-        {% endif %}
-    </ul>
-</div>
+			{# Menu réservé seulement à l'admin #}
+			{% if is_granted('ROLE_ADMIN') %}
+				<li class="list-group-item">
+					<a href="{{ path('app_admin_category_list') }}" class="text-decoration-none btn-link ">Gestion des catégories</a>
+				</li>
+				<li class="list-group-item">
+					<a href="{{ path('app_admin_status_list') }}" class="text-decoration-none btn-link ">Gestion des statuts</a>
+				</li>
+				<li class="list-group-item">
+					<a href="{{ path('app_admin_user_list') }}" class="text-decoration-none btn-link ">Gestion des utilisateurs</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
 {% endblock %}

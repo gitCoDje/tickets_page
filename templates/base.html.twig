@@ -34,13 +34,13 @@
         {# ========== HEADER ========== #}
         <header class="shadow">
             <div
-                class="log d-flex justify-content-between align-items-end mx-auto w-75"
+                class="log d-flex justify-content-between align-items-center mx-auto w-75"
             >
                 {# Titre du site #}
                 <a href="{{ path('app_home') }}"
                     ><h1>Ticket <span>Page</span></h1></a
                 >
-                <div class="d-flex flex-column align-items-center">
+                <div class="d-flex flex-column align-items-center mt-3">
                     {# Nom de l'utilisateur loggé #}
                     <p>{{ app.user ? app.user.email : "" }}</p>
 
@@ -52,7 +52,7 @@
 
                     {% else %}
                     <a href="{{ path('app_login') }}"
-                        ><span class="log">Se connecter</span></a
+                        ><span class="btn btn-primary">Se connecter</span></a
                     >
                     {% endif %}
                 </div>

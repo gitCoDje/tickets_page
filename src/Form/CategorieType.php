@@ -1,5 +1,7 @@
 <?php
 
+// src/Form/CategorieType.php
+
 namespace App\Form;
 
 use App\Entity\Categorie;
@@ -13,6 +15,7 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Ajoute un champ pour le nom de la catégorie
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la catégorie',
                 'attr' => ['placeholder' => 'Entrez un nom'],
@@ -22,6 +25,7 @@ class CategorieType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configure les options du formulaire, spécifiant la classe de données associée
         $resolver->setDefaults([
             'data_class' => Categorie::class,
         ]);

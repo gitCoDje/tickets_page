@@ -4,7 +4,6 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Statut;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -17,7 +16,9 @@ class StatutFixtures extends Fixture
         // Création des statuts  
         $statuts = ['Nouveau', 'Ouvert', 'Résolu', 'Fermé'];
         foreach ($statuts as $libelle) {
+            // Instanciation d'un nouvel objet Statut
             $statut = new Statut();
+            // Définition du libellé du statut
             $statut->setStatut($libelle);
 
             // prépare la sauvegarde en base

@@ -1,5 +1,7 @@
 <?php
 
+// src/Form/StatutType.php
+
 namespace App\Form;
 
 use App\Entity\Statut;
@@ -13,6 +15,7 @@ class StatutType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Ajoute un champ pour le nom du statut
             ->add('statut', TextType::class, [
                 'label' => 'Nom du statut',
                 'attr' => ['placeholder' => 'Entrez un nom de statut'],
@@ -22,6 +25,7 @@ class StatutType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configure les options du formulaire, spécifiant la classe de données associée
         $resolver->setDefaults([
             'data_class' => Statut::class,
         ]);

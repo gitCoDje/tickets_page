@@ -68,8 +68,7 @@ class TicketType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(['message' => "Veuillez sélectionner une catégorie"])
-                ]
-                // Ajoute l'option statut (uniquement pour l'admin et le personnel)
+                ]                
             ]);
     }
     public function configureOptions(OptionsResolver $resolver): void

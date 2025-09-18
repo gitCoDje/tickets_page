@@ -4,7 +4,6 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Ticket;
 use App\Entity\Categorie;
 use App\Entity\Statut;
@@ -20,13 +19,19 @@ class TicketFixtures extends Fixture implements DependentFixtureInterface
     {
         // Création d'un ticket exemple
         $ticket = new Ticket();
+        // Définition de l'email associé au ticket
         $ticket->setEmail('marie.curie@radium.com');
+        // Définition de la date d'ouverture du ticket à la date actuelle
         $ticket->setDateOuverture(new \DateTime());
+        // Définition de la description du problème
         $ticket->setDescription('Problème informatique');
 
-    $ticket->setCategorie($this->getReference('categorie-Incident', Categorie::class));
-    $ticket->setStatut($this->getReference('statut-Nouveau', Statut::class));
-    $ticket->setResponsable($this->getReference('utilisateur-admin', Utilisateur::class));
+        // Récupération de la catégorie "Incident" par référence
+        $ticket->setCategorie($this->getReference('categorie-Incident', Categorie::class));
+        // Récupération du statut "Nouveau" par référence
+        $ticket->setStatut($this->getReference('statut-Nouveau', Statut::class));
+        // Récupération de l'utilisateur responsable par référence
+        $ticket->setResponsable($this->getReference('utilisateur-admin', Utilisateur::class));
 
         // prépare la sauvegarde en base
         $manager->persist($ticket);

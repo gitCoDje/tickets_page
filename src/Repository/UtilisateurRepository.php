@@ -1,5 +1,7 @@
 <?php
 
+// src/Repository/UtilisateurRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Utilisateur;
@@ -13,6 +15,7 @@ class UtilisateurRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
+        // Appelle le constructeur de la classe parente avec le registre et la classe associée
         parent::__construct($registry, Utilisateur::class);
     }
 

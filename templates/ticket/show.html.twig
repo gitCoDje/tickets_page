@@ -1,30 +1,50 @@
-{# templates/ticket/show.html.twig #} {% extends 'base.html.twig' %} {% block
-title %}Détail du ticket{% endblock %} {% block body %}
-<div class="container mb-4">
-<h2>Détail du ticket</h2>
+{# templates/ticket/show.html.twig #}
+{% extends 'base.html.twig' %}
+{% block
+title %}Détail du ticket
+{% endblock %}
+{% block body %}
+	<div class="container mb-4">
+		<h2>Détail du ticket</h2>
 
-<ul>
-    <li><strong>Email de l'auteur :</strong> {{ ticket.email }}</li>
-    <li><strong>Date d’ouverture :</strong> {{ ticket.dateOuverture|date('d/m/Y H:i')}}</li>
-    <li>
-        <strong>Date de clôture :</strong> {% if ticket.dateCloture is not null %}
-        {{ ticket.dateCloture|date('d/m/Y H:i') }}
-        {% else %} Non défini {% endif %}
-    </li>
-    <li><strong>description :</strong> {{ ticket.description }}</li>
-    <li><strong>Catégorie :</strong> {{ ticket.categorie.nom }}</li>
-    <li><strong>Statut :</strong> {{ ticket.statut.statut }}</li>
-    <li>
-        <strong>Responsable :</strong> {% if ticket.responsable is not null %}
-        {{ ticket.responsable.email }}
-        {% else %} Non défini {% endif %}
-    </li>
-</ul>
-<a href="{{ path('app_ticket') }}" class="btn btn-primary">Retour à l'accueil</a>
+		<ul>
+			<li>
+				<strong>Email de l'auteur :</strong>
+				{{ ticket.email }}</li>
+			<li>
+				<strong>Date d’ouverture :</strong>
+				{{ ticket.dateOuverture|date('d/m/Y H:i')}}</li>
+			<li>
+				<strong>Date de clôture :</strong>
+				{% if ticket.dateCloture is not null %}
+					{{ ticket.dateCloture|date('d/m/Y H:i') }}
+				{% else %}
+					Non défini
+				{% endif %}
+			</li>
+			<li>
+				<strong>description :</strong>
+				{{ ticket.description }}</li>
+			<li>
+				<strong>Catégorie :</strong>
+				{{ ticket.categorie.nom }}</li>
+			<li>
+				<strong>Statut :</strong>
+				{{ ticket.statut.statut }}</li>
+			<li>
+				<strong>Responsable :</strong>
+				{% if ticket.responsable is not null %}
+					{{ ticket.responsable.email }}
+				{% else %}
+					Non défini
+				{% endif %}
+			</li>
+		</ul>
+		<a href="{{ path('app_ticket') }}" class="btn btn-primary">Retour à l'accueil</a>
 
-{# Bouton uniquement réservé aux admins et personnels #}
-{% if is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') %}
-<a href="{{ path('app_admin_ticket_list') }}" class="btn btn-secondary">Liste de tous les ickets</a>
-{% endif %} 
-</div>
+		{# Bouton uniquement réservé aux admins et personnels #}
+		{% if is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') %}
+			<a href="{{ path('app_admin_ticket_list') }}" class="btn btn-secondary">Liste des tickets</a>
+		{% endif %}
+	</div>
 {% endblock %}

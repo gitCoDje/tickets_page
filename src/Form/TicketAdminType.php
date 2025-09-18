@@ -23,6 +23,7 @@ class TicketAdminType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Ajoute un champ pour l'email de l'utilisateur
             ->add('email', TextType::class, [
                 'label' => 'Votre Email',
                 'attr' => ['class' => 'form-control'],
@@ -32,6 +33,7 @@ class TicketAdminType extends AbstractType
                     new Email(['message' => "L'adresse Email n'est pas au bon format."])
                 ],
             ])
+            // Ajoute un champ pour la description du ticket
             ->add('description', TextareaType::class, [
                 'label' => 'Description du ticket',
                 'attr' => ['class' => 'form-control', 'rows' => 10, 'cols' => 50],
@@ -46,6 +48,7 @@ class TicketAdminType extends AbstractType
                     ]),
                 ],
             ])
+            // Ajoute un champ pour sélectionner la catégorie
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom',
@@ -56,6 +59,7 @@ class TicketAdminType extends AbstractType
                     new NotBlank(['message' => "Veuillez sélectionner une catégorie"])
                 ],
             ])
+            // Ajoute un champ pour sélectionner le statut
             ->add('statut', EntityType::class, [
                 'class' => Statut::class,
                 'choice_label' => 'statut',
@@ -63,6 +67,7 @@ class TicketAdminType extends AbstractType
                 'placeholder' => 'Choisir un statut',
                 'required' => true,
             ])
+            // Ajoute un champ pour sélectionner le responsable
             ->add('responsable', EntityType::class, [
                 'class' => Utilisateur::class,
                 'choice_label' => 'email',
@@ -74,6 +79,7 @@ class TicketAdminType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configure les options du formulaire, spécifiant la classe de données associée
         $resolver->setDefaults([
             'data_class' => Ticket::class,
         ]);

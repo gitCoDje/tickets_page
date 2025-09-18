@@ -1,17 +1,22 @@
-{# templates/admin/category_form.html.twig #} 
-{% extends 'base.html.twig' %} {%
-block title %}
-{{ title }}
-{% endblock %} {% block body %}
-<div class="container ">
-    <h2>{{ title }}</h2>
-    {{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    <button class="btn btn-primary mt-3">Enregistrer</button>
-    {{ form_end(form) }}
+{# templates/admin/category_form.html.twig #}
 
-    <a href="{{ path('app_admin_category_list') }}" class="btn btn-secondary mt-3"
-        >Retour à la liste</a
-    >
-</div>
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{# Définit le titre de la page #}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h2>{{ title }}</h2>
+		{# Démarre le formulaire #}
+		{{ form_start(form) }}
+		{# Affiche le champ 'nom' du formulaire #}
+		{{ form_row(form.nom) }}
+		<button class="btn btn-primary mt-3">Enregistrer</button>
+		{# Termine le formulaire #}
+		{{ form_end(form) }}
+		<a href="{{ path('app_admin_category_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+	</div>
 {% endblock %}

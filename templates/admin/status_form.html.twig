@@ -1,17 +1,17 @@
-{# templates/admin/status_form.html.twig #} 
-{% extends 'base.html.twig' %} {%
-block title %}
-{{ title }}
-{% endblock %} {% block body %}
-<div class="container">
-    <h2>{{ title }}</h2>
-    {{ form_start(form) }}
-    {{ form_row(form.statut) }}
-    <button class="btn btn-primary mt-3">Enregistrer</button>
-    {{ form_end(form) }}
+{# templates/admin/status_form.html.twig #}
 
-    <a href="{{ path('app_admin_status_list') }}" class="btn btn-secondary mt-3"
-        >Retour à la liste</a
-    >
-</div>
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h2>{{ title }}</h2>
+		{{ form_start(form) }}
+		{{ form_row(form.statut) }}
+		<button class="btn btn-primary mt-3">Enregistrer</button>
+		{{ form_end(form) }}
+
+		<a href="{{ path('app_admin_status_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+	</div>
 {% endblock %}

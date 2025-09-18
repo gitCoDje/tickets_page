@@ -1,58 +1,51 @@
-{# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block
-title %}Connexion!{% endblock %} {% block body %}
-<section
-    class="pt-5 d-flex flex-column align-items-center justify-content-center"
->
-    <h1 class="mb-4">Bienvenue Sur <span>Ticket Page</span></h1>
+{# templates/security/login.html.twig #}
 
-    <h2 class="m-4">Connexion</h2>
-    <form method="post" class="gap-2 d-flex flex-column">
-        {% if error %}
-        <div class="alert alert-danger">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
-        {% endif %}         
-        
-        {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }},
-            <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-        {% endif %}
+{% extends 'base.html.twig' %}
 
-        <label for="username">Email</label>
-        <input
-            type="email"
-            value="{{ last_username }}"
-            name="_username"
-            id="username"
-            class="form-control"
-            autocomplete="email"
-            required
-            autofocus
-        />
-        <label for="password">Password</label>
-        <input
-            type="password"
-            name="_password"
-            id="password"
-            class="form-control mb-1"
-            autocomplete="current-password"
-            required
-        />
-        <input
-            type="hidden"
-            name="_csrf_token"
-            data-controller="csrf-protection"
-            value="{{ csrf_token('authenticate') }}"
-        />
+{% block title %}
+	{# Définit le titre de la page de connexion #}
+	Connexion!
+{% endblock %}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Se connecter
-        </button>
-        <div class="mt-2">
-            <a href="{{ path('app_ticket') }}">(Continuer sans se connecter)</a>
-        </div>
-    </form>
-</section>
+{% block body %}
+	<section class="pt-5 d-flex flex-column align-items-center justify-content-center">
+		<h1 class="mb-4">Bienvenue Sur <span>Ticket Page</span>
+		</h1>
+
+		<h2 class="m-4">Connexion</h2>
+		<form method="post" class="gap-2 d-flex flex-column">
+			{% if error %}
+				<div
+					class="alert alert-danger">
+					{# Affiche le message d'erreur si la connexion échoue #}
+					{{ error.messageKey|trans(error.messageData, 'security') }}
+				</div>
+			{% endif %}
+
+			{% if app.user %}
+				<div
+					class="mb-3">
+					{# Affiche un message si l'utilisateur est déjà connecté #}
+					Vous êtes connecté en tant que 
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Logout</a>
+				</div>
+			{% endif %}
+
+			<label for="username">Email</label>
+			<input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus/>
+			<label for="password">Password</label>
+			<input type="password" name="_password" id="password" class="form-control mb-1" autocomplete="current-password" required/>
+			<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}"/>
+
+			<button class="btn btn-lg btn-primary" type="submit">
+				Se connecter
+			</button>
+			<div
+				class="mt-2">
+				{# Lien pour continuer sans se connecter #}
+				<a href="{{ path('app_ticket') }}">(Continuer sans se connecter)</a>
+			</div>
+		</form>
+	</section>
 {% endblock %}
