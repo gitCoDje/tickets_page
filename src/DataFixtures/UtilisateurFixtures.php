@@ -37,7 +37,7 @@ class UtilisateurFixtures extends Fixture
         // Attribution du rôle d'utilisateur
         $personnel->setRoles(['ROLE_USER']);
         // Sécurisation du mot de passe par Hashage
-        $personnel->setPassword($this->passwordHasher->hashPassword($personnel, 'adminmdp'));
+        $personnel->setPassword($this->passwordHasher->hashPassword($personnel, 'personnelmdp'));
         // prépare la sauvegarde en base
         $manager->persist($personnel);
 

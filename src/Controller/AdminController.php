@@ -50,7 +50,7 @@ final class AdminController extends AbstractController
     /* ========== GESTION DES TICKETS ========== */
 
     // Route qui affiche la liste de tous les tickets existants
-    #[Route('/tickets', name: 'app_admin_ticket_list', methods: ['GET'])]
+    #[Route('/admin/tickets', name: 'app_admin_ticket_list', methods: ['GET'])]
     public function list(TicketRepository $ticketRepository): Response
     {
         // Récupère tous les tickets de la base
@@ -130,7 +130,7 @@ final class AdminController extends AbstractController
     /* ========== GESTION CATEGORIE ========== */
 
     // Route pour afficher toutes les catégories
-    #[Route('/categories', name: 'app_admin_category_list', methods: ['GET'])]
+    #[Route('/admin/categories', name: 'app_admin_category_list', methods: ['GET'])]
     public function listCategories(CategorieRepository $categorieRepository): Response
     {
         // Récupère la liste des catégories
@@ -143,7 +143,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour créer une nouvelle catégorie
-    #[Route('/categories/create', name: 'app_admin_category_create', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/create', name: 'app_admin_category_create', methods: ['GET', 'POST'])]
     public function createCategory(Request $request, EntityManagerInterface $em): Response
     {
         // Instancie une nouvelle catégorie
@@ -172,7 +172,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour modifier une catégorie existante
-    #[Route('/categories/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/categories/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
     public function editCategory(int $id, Request $request, CategorieRepository $categorieRepository, EntityManagerInterface $em): Response
     {
         // Recherche la catégorie par ID
@@ -204,7 +204,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour supprimer une catégorie existante
-    #[Route('/categories/{id}/delete', name: 'app_admin_category_delete', methods: ['GET'])]
+    #[Route('/admin/categories/{id}/delete', name: 'app_admin_category_delete', methods: ['GET'])]
     public function deleteCategory(int $id, CategorieRepository $categorieRepository, EntityManagerInterface $em): Response
     {
         // Recherche la catégorie
@@ -227,7 +227,7 @@ final class AdminController extends AbstractController
     /* ========== GESTION STATUT ========== */
 
     // Route pour afficher tous les statuts
-    #[Route('/statuts', name: 'app_admin_status_list', methods: ['GET'])]
+    #[Route('/admin/statuts', name: 'app_admin_status_list', methods: ['GET'])]
     public function listStatuts(StatutRepository $statutRepository): Response
     {
         $statuts = $statutRepository->findAll();
@@ -238,7 +238,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour créer un nouveau statut
-    #[Route('/statuts/create', name: 'app_admin_status_create', methods: ['GET', 'POST'])]
+    #[Route('/admin/statuts/create', name: 'app_admin_status_create', methods: ['GET', 'POST'])]
     public function createStatus(Request $request, EntityManagerInterface $em): Response
     {
         $statut = new Statut();
@@ -261,7 +261,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour modifier un statut existant
-    #[Route('/statuses/{id}/edit', name: 'app_admin_status_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/statuses/{id}/edit', name: 'app_admin_status_edit', methods: ['GET', 'POST'])]
     public function editNomStatus(int $id, Request $request, StatutRepository $statutRepository, EntityManagerInterface $em): Response
     {
         $statut = $statutRepository->find($id);
@@ -287,7 +287,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour supprimer une statut existante
-    #[Route('/statuses/{id}/delete', name: 'app_admin_status_delete', methods: ['GET'])]
+    #[Route('/admin/statuses/{id}/delete', name: 'app_admin_status_delete', methods: ['GET'])]
     public function deleteNomStatus(int $id, StatutRepository $statutRepository, EntityManagerInterface $em): Response
     {
         $statut = $statutRepository->find($id);
@@ -307,7 +307,7 @@ final class AdminController extends AbstractController
     /* ========== GESTION UTILISATEUR ========== */
 
     // Route pour afficher la liste des utilisateurs
-    #[Route('/utilisateurs', name: 'app_admin_user_list', methods: ['GET'])]
+    #[Route('/admin/utilisateurs', name: 'app_admin_user_list', methods: ['GET'])]
     public function listUtilisateurs(UtilisateurRepository $utilisateurRepository): Response
     {
         $utilisateurs = $utilisateurRepository->findAll();
@@ -320,7 +320,7 @@ final class AdminController extends AbstractController
     public function __construct(private UserPasswordHasherInterface $passwordHasher) {}
 
     // Route pour créer un nouvel utilisateur
-    #[Route('/utilisateurs/create', name: 'app_admin_user_create', methods: ['GET', 'POST'])]
+    #[Route('/admin/utilisateurs/create', name: 'app_admin_user_create', methods: ['GET', 'POST'])]
     public function createUtilisateur(Request $request, EntityManagerInterface $em): Response
     {
         $utilisateur = new Utilisateur();
@@ -354,7 +354,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour modifier un utilisateur existant
-    #[Route('/utilisateurs/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/utilisateurs/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
     public function editUtilisateur(int $id, Request $request, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
     {
         $utilisateur = $utilisateurRepository->find($id);
@@ -380,7 +380,7 @@ final class AdminController extends AbstractController
     }
 
     // Route pour supprimer un utilisateur existant
-    #[Route('/utilisateurs/{id}/delete', name: 'app_admin_user_delete', methods: ['GET'])]
+    #[Route('/admin/utilisateurs/{id}/delete', name: 'app_admin_user_delete', methods: ['GET'])]
     public function deleteUtilisateur(int $id, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
     {
         $utilisateur = $utilisateurRepository->find($id);

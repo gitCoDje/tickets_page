@@ -6,76 +6,79 @@ block title %}Listes des tickets
 {% endblock %}
 
 {% block body %}
-    <div class="container mb-4">
-        <h2>Listes des tickets</h2>
+	<div class="container mb-4">
+		<h2>Listes des tickets</h2>
 
-        <div class="d-flex flex-column gap-2">
-            {% for ticket in tickets %}
-                <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-4
-                {# Permet de changer la couleur du ticket de la liste quand le statut est sur Résolu ou fermé #}
-                {% if ticket.statut and ticket.statut.statut in ['Résolu', 'Fermé'] %} bg-success bg-opacity-25 
-                {% endif %}">
-                    <div>
-                        {# Affiche id du Ticket #}
-                        <strong>ID :</strong>
-                        {{ ticket.id }}
-                        <br/>
-                        {# Affiche l'email du createur du Ticket #}
-                        <strong>Email client :</strong>
-                        {{ ticket.email }}
-                        <br/>
-                        {# Affiche la date de l'ouverture du Ticket #}
-                        <strong>Date ouverture :</strong>
-                        {{ ticket.dateOuverture|date('d/m/Y H:i') }}
-                        <br/>
-                        <strong>Date clôture :</strong>
-                        {# Affiche la date de fermeture du Ticket #}
-                        {% if ticket.dateCloture is not null %}
-                            {{ ticket.dateCloture|date('d/m/Y H:i') }}
-                        {% else %}
-                            Non clôturé
-                        {% endif %}
-                        <br/>
-                        {# Affiche la catégorie du Ticket #}
-                        <strong>Catégorie :</strong>
-                        {{ ticket.categorie.nom }}
-                        <br/>
-                        {# Affiche une courte description du Ticket #}
-                        <strong>Description :</strong>
-                        {{ ticket.description[:10] ~ (ticket.description|length > 10 ? '...' : '') }}
-                        <br/>
-                        <strong>Statut :</strong>
-                        {% if ticket.statut is not null %}
-                            {# Affiche le statut du Ticket #}
-                            {{ ticket.statut.statut }}
-                        {% else %}
-                            Non défini
-                        {% endif %}
-                        <br/>
-                        {# Affiche le responsable qui va gérer le problème de la demande #}
-                        <strong>Responsable :</strong>
-                        {% if ticket.responsable is not null %}
-                            {{ ticket.responsable.email }}
-                        {% else %}
-                            Non défini
-                        {% endif %}
-                    </div>
-                    <div>
-                        <a href="{{ path('app_ticket_show', { id: ticket.id }) }}" class="btn btn-info btn-sm">Voir</a>
-                        {# Bouton de modification #}
-                        <a href="{{ path('app_admin_ticket_edit', { id: ticket.id }) }}" class="btn btn-primary btn-sm ms-2">Modifier</a>
-                        {# Bouton de suppression #}
-                        <a href="{{ path('app_admin_ticket_delete', { id: ticket.id }) }}" class="btn btn-danger btn-sm">
-                            Supprimer
-                        </a>
-                    </div>
-                </div>
-            {% else %}
-                <div>Aucun ticket trouvé.</div>
-            {% endfor %}
-        </div>
-        <a href="{{ path('app_ticket') }}" class="btn btn-primary">Créer un ticket</a>
-        <a href="{{ path('app_admin') }}" class="btn btn-secondary">Retour</a>
-    </div>
+		<div class="d-flex flex-column gap-2">
+			{% for ticket in tickets %}
+				<div class="d-flex justify-content-between align-items-center p-3 border rounded mb-4
+						                {# Permet de changer la couleur du ticket de la liste quand le statut est sur Résolu ou fermé #}
+						                {% if ticket.statut and ticket.statut.statut in ['Résolu', 'Fermé'] %} bg-success bg-opacity-25
+						                {% endif %}">
+					<div>
+						{# Affiche id du Ticket #}
+						<strong>ID :</strong>
+						{{ ticket.id }}
+						<br/>
+						{# Affiche l'email du createur du Ticket #}
+						<strong>Email client :</strong>
+						{{ ticket.email }}
+						<br/>
+						{# Affiche la date de l'ouverture du Ticket #}
+						<strong>Date ouverture :</strong>
+						{{ ticket.dateOuverture|date('d/m/Y H:i') }}
+						<br/>
+						<strong>Date clôture :</strong>
+						{# Affiche la date de fermeture du Ticket #}
+						{% if ticket.dateCloture is not null %}
+							{{ ticket.dateCloture|date('d/m/Y H:i') }}
+						{% else %}
+							Non clôturé
+						{% endif %}
+						<br/>
+						{# Affiche la catégorie du Ticket #}
+						<strong>Catégorie :</strong>
+						{{ ticket.categorie.nom }}
+						<br/>
+						{# Affiche une courte description du Ticket #}
+						<strong>Description :</strong>
+						{{ ticket.description[:10] ~ (ticket.description|length > 10 ? '...' : '') }}
+						<br/>
+						<strong>Statut :</strong>
+						{% if ticket.statut is not null %}
+							{# Affiche le statut du Ticket #}
+							{{ ticket.statut.statut }}
+						{% else %}
+							Non défini
+						{% endif %}
+						<br/>
+						{# Affiche le responsable qui va gérer le problème de la demande #}
+						<strong>Responsable :</strong>
+						{% if ticket.responsable is not null %}
+							{{ ticket.responsable.email }}
+						{% else %}
+							Non défini
+						{% endif %}
+					</div>
+					<div>
+						<a href="{{ path('app_ticket_show', { id: ticket.id }) }}" class="btn btn-info btn-sm">Voir</a>
+						{# Bouton de modification #}
+						<a href="{{ path('app_admin_ticket_edit', { id: ticket.id }) }}" class="btn btn-primary btn-sm ms-2">Modifier</a>
+						{# Bouton de suppression seulement pour l'admin #}
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('app_admin_ticket_delete', { id: ticket.id }) }}" class="btn btn-danger btn-sm">
+								Supprimer
+							</a>
+						{% endif %}
+
+					</div>
+				</div>
+			{% else %}
+				<div>Aucun ticket trouvé.</div>
+			{% endfor %}
+		</div>
+		<a href="{{ path('app_ticket') }}" class="btn btn-primary">Créer un ticket</a>
+		<a href="{{ path('app_admin') }}" class="btn btn-secondary">Retour</a>
+	</div>
 
 {% endblock %}
