@@ -36,6 +36,7 @@ final class TicketController extends AbstractController
 
             // Récupère le statut "Nouveau" pour assigner au ticket
             $statutNouveau = $statutRepository->findOneBy(['statut' => 'Nouveau']);
+            
             $ticket->setStatut($statutNouveau);
 
             // Prépare la sauvegarde du ticket en base de données

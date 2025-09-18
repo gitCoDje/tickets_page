@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class TicketTest extends TestCase
 {
+    // Test des getters et setters pour la description
     public function testDescriptionGetterSetter(): void
     {
         $ticket = new Ticket();
@@ -19,6 +20,7 @@ class TicketTest extends TestCase
         $this->assertEquals($description, $ticket->getDescription(), "La description doit être conforme");
     }
 
+    // Test des getters et setters pour l'email
     public function testEmailGetterSetter(): void
     {
         $ticket = new Ticket();
@@ -28,6 +30,7 @@ class TicketTest extends TestCase
         $this->assertEquals($email, $ticket->getEmail(), "L'email doit être conforme");
     }
 
+    // Test des getters et setters pour la catégorie
     public function testCategorieGetterSetter(): void
     {
         $ticket = new Ticket();
@@ -38,6 +41,7 @@ class TicketTest extends TestCase
         $this->assertSame($categorie, $ticket->getCategorie(), "La catégorie doit être conforme");
     }
 
+    // Test des getters et setters pour le statut
     public function testStatutGetterSetter(): void
     {
         $ticket = new Ticket();
@@ -48,6 +52,7 @@ class TicketTest extends TestCase
         $this->assertSame($statut, $ticket->getStatut(), "Le statut doit être conforme");
     }
 
+    // Test des getters et setters pour le responsable
     public function testResponsableGetterSetter(): void
     {
         $ticket = new Ticket();
@@ -58,6 +63,7 @@ class TicketTest extends TestCase
         $this->assertSame($utilisateur, $ticket->getResponsable(), "Le responsable doit être conforme");
     }
 
+    // Test pour vérifier que la date de clôture est mise à jour selon le statut
     public function testSetStatutUpdatesDateCloture(): void
     {
         $ticket = new Ticket();
@@ -72,7 +78,7 @@ class TicketTest extends TestCase
         $ticket->setStatut($statutOuvert);
         $this->assertNull($ticket->getDateCloture(), "La date de clôture doit être nulle si statut est autre que 'Résolu' ou 'Fermé'");
 
-        // Quand le statut est fermé, la date de clôture doit être définie (proche de maintenant)
+        // Quand le statut est fermé, la date de clôture doit être définie
         $ticket->setStatut($statutFermé);
         $this->assertInstanceOf(\DateTime::class, $ticket->getDateCloture(), "La date de clôture doit être un objet DateTime");
 
